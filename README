@@ -1,0 +1,12 @@
+*** AI Reading AI***
+
+*** Overview ***
+
+*** Setup ***
+
+To run the program, use command:
+'''
+python3 main.py -vdm ../models/intel/vehicle-detection-adas-0002/FP16/vehicle-detection-adas-0002.xml -trm ../models/intel/text-recognition-0012/FP16/text-recognition-0012.xml -tdm ../models/intel/text-recognition-0012/FP16/text-recognition-0012.xml -i ../media/Toronto_driving.mp4 -p CAM -pt 0.6
+'''
+
+
