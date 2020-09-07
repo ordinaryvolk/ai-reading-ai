@@ -1,12 +1,24 @@
-*** AI Reading AI***
+*AI Reading AI*
 
-*** Overview ***
+*Overview*
 
-*** Setup ***
+*Setup*
 
 To run the program, use command:
 '''
-python3 main.py -vdm ../models/intel/vehicle-detection-adas-0002/FP16/vehicle-detection-adas-0002.xml -trm ../models/intel/text-recognition-0012/FP16/text-recognition-0012.xml -tdm ../models/intel/text-recognition-0012/FP16/text-recognition-0012.xml -i ../media/Toronto_driving.mp4 -p CAM -pt 0.6
+python3 main.py -vdm ../models/intel/vehicle-detection-adas-0002/FP16/vehicle-detection-adas-0002.xml -trm ../models/intel/text-recognition-0012/FP16/text-recognition-0012.xml -tdm ../models/intel/text-detection-0004/FP16/text-detection-0004.xml -i ../media/Toronto_driving.mp4 -p CAM -pt 0.6
 '''
+
+To run the program with local power video, use the following command:
+'''
+python3 main.py -vdm ../models/intel/vehicle-detection-adas-0002/FP16/vehicle-detection-adas-0002.xml -trm ../models/intel/text-recognition-0012/FP16/text-recognition-0012.xml -tdm ../models/intel/text-detection-0004/FP16/text-detection-0004.xml -i ../media/Toronto_driving.mp4 -p ../media/power.mp4 -pt 0.6
+'''
+
+*Reference*
+OpenVino vehicle detection model: https://docs.openvinotoolkit.org/2020.4/omz_models_intel_vehicle_detection_adas_0002_description_vehicle_detection_adas_0002.html
+OpenVino text detection model: https://docs.openvinotoolkit.org/2020.4/omz_models_intel_text_detection_0004_description_text_detection_0004.html
+PixelLink paper: https://arxiv.org/pdf/1801.01315.pdf
+OpenVino text recognition model: https://docs.openvinotoolkit.org/2020.4/omz_models_intel_text_recognition_0012_description_text_recognition_0012.html
+Handwritten Japanese Deep Learning Based OCR with Touch Panel Demo: https://github.com/yas-sim/handwritten-japanese-ocr
 
 

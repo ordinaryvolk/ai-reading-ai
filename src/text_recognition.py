@@ -7,7 +7,7 @@ from model import Models
 
 class TextRecognitionModel(Models):
     '''
-    Head pose class
+    Text recognition class
     '''
 
     def __init__(self, model_name, device='CPU', extensions=None):
@@ -20,7 +20,7 @@ class TextRecognitionModel(Models):
         input: frame - original frame
                output - inference output
                threshold - confidence threshold
-        output: head pose estimate results
+        output: text recognition results
         '''
 
 

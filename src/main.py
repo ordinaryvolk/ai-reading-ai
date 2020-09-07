@@ -7,6 +7,7 @@ import cv2
 import traceback
 import logging as log
 from argparse import ArgumentParser
+from osc import Scope
 
 # Local class imports
 from input_feeder import InputFeeder
@@ -19,6 +20,8 @@ from text_detection import TextDetectionModel
 VEHICLEENGINE = "MYRIAD"
 POWERENGINE   = "CPU"
 LOGLEVEL = log.INFO
+RESIZEWIDTH = 800
+RESIZEHEIGHT = 600
 
 # Argement parser
 def build_argparser():
@@ -125,14 +128,29 @@ def main():
         
         for frame, power_frame in zip(video_input_channel.next_batch(), power_input_channel.next_batch()):
            key = cv2.waitKey(60)
+
+           vehicle_coords, vehicle_inference_time = vehicle_detection_obj.predict(frame, prob_threshold)  
+           log_obj.info("[Info]: vehicles detected: " + str(len(vehicle_coords)))
+           
+           # Draw vehicle bounding boxes in frame and output to screen
+           for i in range(len(vehicle_coords)):
+               cv2.rectangle(frame, (vehicle_coords[i][0], vehicle_coords[i][1]), (vehicle_coords[i][2], vehicle_coords[i][3]), (0,255,0), 2)
+
+           resized_frame = cv2.resize(frame, (RESIZEWIDTH, RESIZEHEIGHT))
+           resized_power_frame = cv2.resize(power_frame, (RESIZEWIDTH, RESIZEHEIGHT))
+           resized_power_frame_grey = cv2.cvtColor(resized_power_frame, cv2.COLOR_BGR2GRAY)
+
+           # Start text detection
+           text_detection_obj.predict(power_frame, prob_threshold)
  
-           cv2.imshow("frame", frame)
-           cv2.imshow("power frame", power_frame)
-            
+           cv2.imshow("Vehicle Inferencing", resized_frame)
+           cv2.imshow("Power Readings", resized_power_frame_grey)
+
            if key == 27:
                break
+
     except Exception as e:
-        #traceback.print_exc()
+        traceback.print_exc()
         if 'shape' in str(e):
             log_obj.info("Video feed finished")
         else:

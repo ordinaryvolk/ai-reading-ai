@@ -54,7 +54,7 @@ class Models:
         self.network = self.plugin.read_network(model=self.model_name, weights=model_bin)
 
         ### Check for supported layers ###
-        if self.device != 'MYRIAD':
+        if self.device == 'CPU':
             self.check_model()
 
         ### Add any necessary extensions ###
